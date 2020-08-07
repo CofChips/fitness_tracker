@@ -31,6 +31,8 @@ app.get("/stats", (req, res) => {
 
 
 // api routes
+
+// for displaying last workout
 app.get("/api/workouts/", (req, res) => {
     db.Workout.find({})
         .populate("exercises")
@@ -43,6 +45,7 @@ app.get("/api/workouts/", (req, res) => {
         });
 });
 
+// chart display
 app.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
     .populate("exercises")
@@ -54,6 +57,7 @@ app.get("/api/workouts/range", (req, res) => {
         });
 });
 
+// for creating new workouts
 app.post("/api/workouts", (req, res) => {
     console.log(req.body)
     db.Workout.create(req.body)
@@ -65,6 +69,7 @@ app.post("/api/workouts", (req, res) => {
         });
 });
 
+// creates new entries in the exercise table and adds the id to the relevant workout entry
 app.put("/api/workouts/:id", (req, res) => {
     var find = { _id: req.params.id };
     db.Exercise.create(req.body)
